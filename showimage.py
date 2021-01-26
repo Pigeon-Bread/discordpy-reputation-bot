@@ -7,7 +7,7 @@ import requests
 def font_size(name : str):
     return int(40 - len(name))
 
-def create_image(av, rep, username):
+def create_image(av, rep, username, bio):
     size1 = (500, 100)
     size2 = (92,92)
 
@@ -17,9 +17,14 @@ def create_image(av, rep, username):
     font = ImageFont.truetype("arial.ttf", font_size(username))
     avatar = avatar.resize(size2)
 
+    bio_font = ImageFont.truetype("arial.ttf", 10)
+
     t = ImageDraw.Draw(back)
     t.text((150, (50 - (font_size(username) / 2))),
     str(username) + ": " + str(rep), fill=(255, 255, 255), font=font)
+
+    t.text((200, (50 - (font_size(username) / 2)+20)),
+    bio, fill=(255,255,255), font=bio_font)
 
     back.paste(avatar, (4,4))
     back.save('result.png')
