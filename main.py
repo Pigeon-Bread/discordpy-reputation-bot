@@ -16,7 +16,7 @@ async def show(ctx, user : discord.Member = None):
         await ctx.send(file=discord.File('result.png'))
     else:
         rep = showrep(user.id)
-        bio = show_bio(ctx.author.id)
+        bio = show_bio(user.id)
         create_image(user.avatar_url, rep, user.display_name, bio)
         await ctx.send(file=discord.File('result.png'))
 
