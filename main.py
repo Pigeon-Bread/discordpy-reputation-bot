@@ -49,8 +49,8 @@ async def remrep(ctx, user: discord.Member=None, amount : int=0):
         await ctx.send(adm_remrep(user.id, amount))
 
 @bot.command(pass_context=True)
-async def bio(ctx, *bio):
-    t = " ".join(bio)
+async def bio(ctx, *sbio):
+    t = " ".join(sbio)
     await ctx.send(edit_bio(ctx.author.id, t))
 
 conn = sqlite3.connect('data.db')

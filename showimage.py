@@ -17,14 +17,14 @@ def create_image(av, rep, username, bio):
     font = ImageFont.truetype("arial.ttf", font_size(username))
     avatar = avatar.resize(size2)
 
-    bio_font = ImageFont.truetype("arial.ttf", 10)
+    bio_font = ImageFont.truetype("arial.ttf", 16)
 
     t = ImageDraw.Draw(back)
-    t.text((150, (50 - (font_size(username) / 2))),
+    t.text((150, (40 - (font_size(username) / 2))),
     str(username) + ": " + str(rep), fill=(255, 255, 255), font=font)
 
-    t.text((200, (50 - (font_size(username) / 2)+20)),
-    bio, fill=(255,255,255), font=bio_font)
+    t.text((200, 60),
+    bio, fill=(192,192,192), font=bio_font)
 
     back.paste(avatar, (4,4))
     back.save('result.png')

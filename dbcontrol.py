@@ -57,18 +57,20 @@ def adm_addrep(user, amount: int):
         return str(amount) + " has been added!"
 
 def bio_exists(user):
-    c.execute("SELECT * FROM bio WHERE userid = (?)", (user,))
+    c.execute("SELECT * FROM bios WHERE userid = (?)", (user,))
     ret = c.fetchall()
     if ret:
         return True
     else:
         c.execute('INSERT INTO bios (userid,bio) VALUES ((?),"")', (user,))
+        conn.commit()
         return bio_exists(user)
 
 def edit_bio(user, bio: str):
     if bio_exists(user):
         if len(bio) <= 20:
             c.execute("UPDATE bios SET bio = (?) WHERE userid = (?)", (bio, user))
+            conn.commit()
             return str("Bio updated!")
         else:
             return str("Longer than 20 chars!")
@@ -77,4 +79,4 @@ def show_bio(user):
     if bio_exists(user):
         c.execute("SELECT bio FROM bios WHERE userid = (?)", (user,))
         ret = c.fetchone()
-        return str(ret)[1:-2]
+        return str(ret)[2:-3]
